@@ -31,8 +31,20 @@ function askDate() {
 			return answer.date
 		});
 }
+function askHourByHourDescriptions() {
+ return inquirer
+ .prompt([{
+  type: 'input',
+  name: 'description',
+  message: 'Escribe las descripciones, separa los dias con &&',
+ }])
+ .then(answer => {
+  return answer.description
+ });
+}
 
 module.exports = {
 	askHours,
- askDate
+ askDate,
+ askHourByHourDescriptions
 };
