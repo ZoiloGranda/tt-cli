@@ -4,7 +4,6 @@ const {headers, body} = require('./params');
 async function sendRequest(params) {
  let {dateToLog, description} = params;
  dateToLog = encodeURIComponent(dateToLog);
- console.log({params});
  const response = await fetch("https://timetracker.bairesdev.com/CargaTimeTracker.aspx", {
   "headers": headers,
   "referrer": "https://timetracker.bairesdev.com/CargaTimeTracker.aspx",
