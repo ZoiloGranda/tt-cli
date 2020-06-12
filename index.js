@@ -1,5 +1,5 @@
 const Promise = require('bluebird');
-const {askHours, askDate, askHourByHourDescriptions} = require('./interface');
+const {askHours, askDate, askHourByHourDescriptions, askDescription} = require('./interface');
 const {sendRequest} = require('./request');
 const chalk = require('chalk');
 
@@ -8,10 +8,16 @@ const chalk = require('chalk');
  const dateToLog = await askDate()
  console.log({hoursToLog});
  console.log({dateToLog});
- if (hoursToLog === '1b1') {
+ switch (hoursToLog) {
+  case '1b1':
   hourByHourHandler({dateToLog:dateToLog})
+  break;
+  case '8':
+  allHoursHandler({dateToLog:dateToLog})
+  break;
+  default:
+  
  }
-	
 })();
 
 async function hourByHourHandler(params) {
@@ -21,16 +27,16 @@ async function hourByHourHandler(params) {
  console.log({hourByHourDescriptions});
  Promise.map(hourByHourDescriptions, function(description) {
   return sendRequest({
-    description:description,
-    dateToLog:dateToLog
-   })
-   .then(function(data) {
-    console.log(chalk.green(`\nHour logged successfully: ${data}`));
-   })
-   .catch(function(err) {
-    console.log(chalk.red('ERROR'));
-    console.log(err);
-   });
+   description:description,
+   dateToLog:dateToLog
+  })
+  .then(function(data) {
+   console.log(chalk.green(`\nHour logged successfully: ${data}`));
+  })
+  .catch(function(err) {
+   console.log(chalk.red('ERROR'));
+   console.log(err);
+  });
  }, {
   concurrency: 1
  })
@@ -42,5 +48,14 @@ async function hourByHourHandler(params) {
   console.log(err);
   process.exit();
  });
+}
+
+async function allHoursHandler(params) {
+ let description = await askDescription()
+ let result = await sendRequest({
+  description:description,
+  dateToLog:dateToLog
+ })
+ console.log(result);
 }
 

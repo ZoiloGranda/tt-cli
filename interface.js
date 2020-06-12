@@ -31,6 +31,7 @@ function askDate() {
 			return answer.date
 		});
 }
+
 function askHourByHourDescriptions() {
  return inquirer
  .prompt([{
@@ -43,8 +44,21 @@ function askHourByHourDescriptions() {
  });
 }
 
+function askDescription() {
+ return inquirer
+ .prompt([{
+  type: 'input',
+  name: 'description',
+  message: 'Escribe la descripcion',
+ }])
+ .then(answer => {
+  return answer.description
+ });
+}
+
 module.exports = {
 	askHours,
  askDate,
- askHourByHourDescriptions
+ askHourByHourDescriptions,
+ askDescription
 };
