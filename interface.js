@@ -37,7 +37,7 @@ function askHourByHourDescriptions() {
  .prompt([{
   type: 'input',
   name: 'description',
-  message: 'Escribe las descripciones, separa los dias con &&',
+  message: 'Escribe las descripciones, separa las horas con &&',
  }])
  .then(answer => {
   return answer.description
