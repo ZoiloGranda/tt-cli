@@ -15,7 +15,7 @@ async function sendRequest(params) {
  if (response.url ==='https://timetracker.bairesdev.com/ListaTimeTracker.aspx') {
   return description
  } else {
-  return response
+  throw response
  }
 }
 

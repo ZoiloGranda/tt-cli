@@ -6,6 +6,7 @@ const chalk = require('chalk');
 (async () => {
  const hoursToLog = await askHours()
  const dateToLog = await askDate()
+ validateDate(dateToLog)
  console.log({hoursToLog});
  console.log({dateToLog});
  switch (hoursToLog) {
@@ -34,14 +35,14 @@ async function hourByHourHandler(params) {
    console.log(chalk.green(`\nHour logged successfully: ${data}`));
   })
   .catch(function(err) {
-   console.log(chalk.red('ERROR'));
-   console.log(err);
+   console.log(chalk.red(`\nERROR WITH ${description}`));
+   // console.log(err);
   });
  }, {
   concurrency: 1
  })
  .then(function() {
-  console.log(chalk.green.bold('Successfully logged hours'));
+  console.log(chalk.blue.bold('Finished logging hours, see logs above'));
   process.exit();
  }).catch(function(err) {
   console.log('ERROR');
@@ -57,5 +58,18 @@ async function allHoursHandler(params) {
   dateToLog:dateToLog
  })
  console.log(result);
+}
+
+function validateDate(dateToLog){
+ let regExpTest = /^\d{2}[/]\d{2}[/]\d{4}$/gi.test(dateToLog)
+ if (!regExpTest) {
+  console.log(chalk.red(`\nIncorrect date ${dateToLog} exiting`));
+  process.exit()
+ }
+ let splitDate = dateToLog.split('/')
+ if (splitDate[0]>31 || splitDate[1]>12 || splitDate[2]>2030 || splitDate[2]<2020) {
+  console.log(chalk.red(`\nIncorrect date ${dateToLog} exiting`));
+  process.exit()
+ }
 }
 
