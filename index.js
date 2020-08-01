@@ -26,6 +26,7 @@ async function hourByHourHandler(params) {
  let hourByHourDescriptions = await askHourByHourDescriptions()
  hourByHourDescriptions= hourByHourDescriptions.split('&&')
  console.log({hourByHourDescriptions});
+ console.log(`Hours to log ${hourByHourDescriptions.length}`);
  Promise.map(hourByHourDescriptions, function(description) {
   return sendRequest({
    description:description,
