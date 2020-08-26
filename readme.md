@@ -12,4 +12,4 @@ CLI Tool to fill time tracker hours, including filling 8 hours one by one when t
 
 ## Notes
 
-Sometimes all the requests fails, to fix this, edit or add a new item on the TimeTracker page and copy the Cookie value from the request and paste it on `params.js`
+Sometimes all the requests fails, to fix this, edit or add a new item on the TimeTracker page and copy the Cookie value (`ASP.NET_SessionId`)from the request and paste it on `params.js`
